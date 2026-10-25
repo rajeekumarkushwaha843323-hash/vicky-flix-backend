@@ -1,0 +1,21 @@
+
+CREATE TABLE IF NOT EXISTS users (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    email VARCHAR(254) NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    phone VARCHAR(24),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS movies (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    description TEXT NOT NULL DEFAULT '',
+    category VARCHAR(80) NOT NULL DEFAULT 'Other',
+    poster_url TEXT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS movies_title_idx
+    ON movies (title);
+  
